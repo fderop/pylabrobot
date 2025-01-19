@@ -2913,7 +2913,12 @@ class STAR(HamiltonLiquidHandler):
       )
 
       x, y, z = drop.destination + center_in_absolute_space + drop.offset
+      print(f"destination: {drop.destination}")
+      print(f"center_in_absolute_space: {center_in_absolute_space}")
+      print(f"offset: {drop.offset}")
+      print(f"x, y, z after destination + center + offset: {x}, {y}, {z}")
       z = z + drop.resource.get_absolute_size_z() - drop.pickup_distance_from_top
+      print(f"z after size and pickup adjustment: {z}")
 
       if use_unsafe_hotel:
         # hotel: down forward down.

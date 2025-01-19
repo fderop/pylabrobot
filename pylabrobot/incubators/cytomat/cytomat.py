@@ -111,7 +111,7 @@ class Cytomat(IncubatorBackend):
     raise Exception(f"Unknown response from cytomat: {resp}")
 
   async def send_action(
-    self, command_type: str, command: str, params: str, timeout: Optional[int] = 10
+    self, command_type: str, command: str, params: str, timeout: Optional[int] = 60
   ) -> OverviewRegisterState:
     """Calls send_command, but has a timeout handler and returns the overview register state.
     Args:
@@ -334,6 +334,7 @@ class Cytomat(IncubatorBackend):
   async def fetch_plate_to_loading_tray(self, plate: Plate):
     site = plate.parent
     assert isinstance(site, PlateHolder)
+    await self.wait_for_task_completion()
     await self.action_storage_to_transfer(site)
 
   async def take_in_plate(self, plate: Plate, site: PlateHolder):
